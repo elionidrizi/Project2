@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col">
+    <form [formGroup]="jokeForm" (ngSubmit)="sendRequest()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <mat-select [formControlName]="'categories'" multiple>
+              <mat-select-trigger>
+                {{categories.value ? categories.value[0] : ''}}
+                <span *ngIf="categories.value?.length > 1" class="example-additional-selection">
+                  (+{{categories.value.length - 1}} {{categories.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of categoryList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Flags</mat-label>
+            <mat-select [formControlName]="'flags'" multiple>
+              <mat-select-trigger>
+                {{flags.value ? flags.value[0] : ''}}
+                <span *ngIf="flags.value?.length > 1" class="example-additional-selection">
+                    (+{{flags.value.length - 1}} {{flags.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of flagsList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Joke Type</mat-label>
+            <mat-select [formControlName]="'jokeType'" multiple>
+              <mat-select-trigger>
+                {{jokeType.value ? jokeType.value[0] : ''}}
+                <span *ngIf="jokeType.value?.length > 1" class="example-additional-selection">
+                 (+{{jokeType.value.length - 1}} {{jokeType.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of jokeTypeList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Contains:</mat-label>
+            <input [formControlName]="'contains'" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input [formControlName]="'amount'" type="number" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngFor="let res of result">
+
+          <div class="col-12">
+            {{res.joke}}
+          </div>
+          <div class="col-12">
+            {{res.setup}}
+            <br>
+            {{res.delivery}}
+          </div>
+        <br>
+      </div>
+      <div>
+        {{single}}
+        {{setup}}
+        <br>
+        {{delivery}}
+      </div>
+      <button class="btn btn-primary" type="submit">Send Request</button>
+      {{updateURL()}}
+    </form>
+  </div>
+
+</div>
